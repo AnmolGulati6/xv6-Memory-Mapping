@@ -1,0 +1,30 @@
+starting build
+
+**********************************************************************
+
+Test build
+build xv6 using make
+
+**********************************************************************
+Trying to build project using make
+make xv6.img fs.img
+gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o trap.o trap.c
+gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o vm.o vm.c
+vm.c: In function ‘wmap’:
+vm.c:433:83: error: implicit declaration of function ‘overlap’ [-Werror=implicit-function-declaration]
+  433 |     if (address % PGSIZE != 0 || address < 0x60000000 || address >= 0x80000000 || overlap(current_process, address, length))
+      |                                                                                   ^~~~~~~
+vm.c: In function ‘getwmapinfo’:
+vm.c:625:38: error: implicit declaration of function ‘count’ [-Werror=implicit-function-declaration]
+  625 |       wmi->n_loaded_pages[counter] = count(mapping->address, mapping->len);
+      |                                      ^~~~~
+cc1: all warnings being treated as errors
+make: *** [<builtin>: vm.o] Error 1
+
+
+test build FAILED
+ (build xv6 using make)
+ make failed (error 2)
+
+Skipped 36 tests.
+To keep testing after failing a test, use flag '-c' or '--continue'
